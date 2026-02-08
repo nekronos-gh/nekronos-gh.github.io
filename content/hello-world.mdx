@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Hello, World!',
+  date: '2025-01-15',
+  description: 'My first blog post — a quick intro to this terminal-themed blog.',
+}
+
+# Hello, World!
+
+Welcome to my blog. This is a space where I'll share thoughts on **high-performance computing**, **systems programming**, and whatever else catches my attention.
+
+## Why a blog?
+
+I wanted a place to document things I learn along the way. Writing helps me think more clearly, and maybe it'll help someone else too.
+
+> "The best way to learn something is to explain it to someone else."
+
+## What to expect
+
+Here are some topics I plan to write about:
+
+* Parallel programming with MPI and OpenMP
+* GPU computing with CUDA
+* Performance profiling and optimization
+* Research notes and paper summaries
+
+And in rough priority order:
+
+1. Getting started with HPC clusters
+2. Writing efficient C++ for numerical computing
+3. Benchmarking and reproducibility tips
+
+## A quick code example
+
+Here's a simple `hello world` in C with MPI:
+
+```c
+#include <mpi.h>
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+    MPI_Init(&argc, &argv);
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    printf("Hello from rank %d\n", rank);
+    MPI_Finalize();
+    return 0;
+}
+```
+
+Check out the [MPI documentation](https://www.open-mpi.org/doc/) for more details.
+
+Stay tuned for more posts!

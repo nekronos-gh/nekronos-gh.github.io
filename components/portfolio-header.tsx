@@ -2,7 +2,8 @@ export function PortfolioHeader() {
 	return (
 		<header className="mb-8">
 			<pre
-				className="text-primary font-mono text-xs leading-tight hidden sm:block mb-4"
+				className="text-primary text-xs leading-tight hidden sm:block mb-4"
+				style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}
 				aria-hidden="true"
 			>
 				{`
@@ -57,6 +58,10 @@ export function StickyNav() {
 			<span className="text-border">|</span>
 			<a href="#contact" className="text-primary hover:underline">
 				contact
+			</a>
+			<span className="text-border">|</span>
+			<a href="/blogs" className="text-primary hover:underline">
+				blogs
 			</a>
 			<span className="text-border">]</span>
 		</nav>
