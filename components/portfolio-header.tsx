@@ -36,28 +36,8 @@ export function StickyNav() {
 				about
 			</a>
 			<span className="text-border">|</span>
-			<a href="#education" className="text-primary hover:underline">
-				education
-			</a>
-			<span className="text-border">|</span>
-			<a href="#research" className="text-primary hover:underline">
-				research
-			</a>
-			<span className="text-border">|</span>
-			<a href="#experience" className="text-primary hover:underline">
-				experience
-			</a>
-			<span className="text-border">|</span>
 			<a href="#projects" className="text-primary hover:underline">
 				projects
-			</a>
-			<span className="text-border">|</span>
-			<a href="#skills" className="text-primary hover:underline">
-				skills
-			</a>
-			<span className="text-border">|</span>
-			<a href="#awards" className="text-primary hover:underline">
-				awards
 			</a>
 			<span className="text-border">|</span>
 			<a href="#contact" className="text-primary hover:underline">

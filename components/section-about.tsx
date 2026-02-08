@@ -12,7 +12,7 @@ export function SectionAbout() {
 					{" through the "}
 					<span className="text-primary">EUMaster4HPC</span>
 					{
-						" program. My research interests lie in distributed systems, fault-tolerant consensus protocols, and high-performance computing infrastructure. I combine strong theoretical foundations with practical industry experience in 5G networking and systems engineering."
+						" program. I combine strong theoretical foundations with practical industry experience in networking and systems engineering."
 					}
 				</p>
 			</TuiBox>

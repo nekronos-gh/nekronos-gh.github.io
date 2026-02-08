@@ -3,19 +3,19 @@ import { TuiBox } from "./tui-box"
 const interests = [
   {
     area: "Distributed Systems",
-    topics: "Consensus protocols, fault tolerance, distributed storage",
+    topics: "Distributed computing, Block-chain technologies",
   },
   {
     area: "High-Performance Computing",
-    topics: "Parallel algorithms, vectorization, memory optimization",
+    topics: "Parallel algorithms, GPU programming, quantum computing",
   },
   {
     area: "Network Systems",
-    topics: "5G core architecture, software-defined networking, load balancing",
+    topics: "5/6G core architecture, software-defined networking",
   },
   {
-    area: "Systems Security",
-    topics: "Byzantine fault tolerance, secure communication protocols",
+    area: "Operating Systems",
+    topics: "Micro-kernels, hardware, computer architecure",
   },
 ]
 

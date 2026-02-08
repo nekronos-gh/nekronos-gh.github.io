@@ -5,15 +5,16 @@ const projects = [
     name: "Rule110 Fast",
     url: "https://github.com/nekronos-gh/rule110",
     description:
-      "Optimized cellular automaton simulation using AVX2 SIMD intrinsics with OpenMP multi-threading. Maximized memory throughput via alignment and hardware directives using C++23 features.",
+      "Optimized cellular automaton simulation using AVX2 SIMD intrinsics with OpenMP multi-threading. Maximized memory throughput via alignment and hardware directives using C++",
+    // TODO: stick tags to the bottom
     tags: ["C++23", "AVX2", "SIMD", "OpenMP"],
   },
   {
     name: "TinyFile",
     url: "https://github.com/nekronos-gh/TinyFile",
     description:
-      "File compression service using hybrid IPC architecture combining POSIX Message Queues and Shared Memory. Implemented state-machine based Ring Buffer with zero-copy memory access.",
-    tags: ["C", "POSIX", "IPC", "Zero-Copy"],
+      "File compression servcursoice using hybrid IPC architecture combining POSIX Message Queues and Shared Memory. Implemented state-machine based Ring Buffer with zero-copy memory access.",
+    tags: ["C", "POSIX", "IPC"],
   },
 ]
 

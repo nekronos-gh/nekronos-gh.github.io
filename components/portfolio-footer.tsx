@@ -22,40 +22,20 @@ export function PortfolioFooter() {
 						>
 							GitHub
 						</a>
+						<span className="text-border">|</span>
+						<a
+							href="https://www.linkedin.com/in/eduardo-rodriguez-sanchez/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-primary hover:underline"
+						>
+							LinkedIn
+						</a>
 					</div>
 				</div>
 
 				{/* ASCII table divider */}
-				<div
-					className="text-xs text-border select-none px-4"
-					aria-hidden="true"
-				>
-					{
-						"├──────────────────────────────────────────────────────────────────┤"
-					}
-				</div>
-
 				<div className="px-4 py-3">
-					<blockquote className="text-xs text-muted-foreground italic">
-						{'"Forty-two," said Deep Thought, with infinite majesty and calm.'}
-					</blockquote>
-				</div>
-
-				{/* ASCII table divider */}
-				<div
-					className="text-xs text-border select-none px-4"
-					aria-hidden="true"
-				>
-					{
-						"├──────────────────────────────────────────────────────────────────┤"
-					}
-				</div>
-
-				<div className="px-4 py-3">
-					<p className="text-xs text-muted-foreground">
-						{'$ echo "Built with monospace aesthetics and terminal vibes"'}
-					</p>
-					<p className="text-xs text-muted-foreground mt-1">{"$ date"}</p>
 					<p className="text-xs text-foreground">
 						{"Eduardo Rodríguez Sánchez | 2026"}
 					</p>
