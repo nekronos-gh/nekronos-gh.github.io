@@ -2,7 +2,7 @@ import { TuiBox } from "./tui-box";
 
 export function SectionAbout() {
 	return (
-		<section id="about" className="scroll-m-12">
+		<section id="about" className="scroll-m-16">
 			<TuiBox title="About">
 				<p className="text-sm leading-relaxed text-foreground">
 					{

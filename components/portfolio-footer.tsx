@@ -1,6 +1,6 @@
 export function PortfolioFooter() {
 	return (
-		<footer id="contact" className="mt-8 scroll-m-12">
+		<footer id="contact" className="mt-8 scroll-m-16">
 			<div className="border border-border rounded-sm overflow-hidden bg-card text-card-foreground">
 				{/* ASCII table header */}
 				<div

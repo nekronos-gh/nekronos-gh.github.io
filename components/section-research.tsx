@@ -28,7 +28,7 @@ const research = [
 
 export function SectionResearch() {
   return (
-    <section id="research" className="scroll-m-12">
+    <section id="research" className="scroll-m-16">
       <TuiBox title="Research Experience">
         <div className="flex flex-col gap-6">
           {research.map((entry) => (

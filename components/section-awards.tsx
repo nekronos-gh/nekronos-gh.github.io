@@ -16,7 +16,7 @@ const publications = [
 
 export function SectionAwards() {
   return (
-    <section id="awards" className="scroll-m-12">
+    <section id="awards" className="scroll-m-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <TuiBox title="Awards & Recognition">
           <ul className="flex flex-col gap-2">

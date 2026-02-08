@@ -29,7 +29,7 @@ const skillCategories = [
 
 export function SectionSkills() {
   return (
-    <section id="skills" className="scroll-m-12">
+    <section id="skills" className="scroll-m-16">
       <TuiBox title="Technical Skills">
         <div className="flex flex-col gap-4">
           {skillCategories.map((cat) => (

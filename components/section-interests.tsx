@@ -21,7 +21,7 @@ const interests = [
 
 export function SectionInterests() {
   return (
-    <section id="interests" className="scroll-m-12">
+    <section id="interests" className="scroll-m-16">
       <TuiBox title="Research Interests">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {interests.map((entry) => (

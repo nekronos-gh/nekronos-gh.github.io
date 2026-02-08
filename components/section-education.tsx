@@ -48,7 +48,7 @@ const education: EducationEntry[] = [
 
 export function SectionEducation() {
   return (
-    <section id="education" className="scroll-m-12">
+    <section id="education" className="scroll-m-16">
       <TuiBox title="Education">
         <div className="flex flex-col gap-6">
           {education.map((entry) => (

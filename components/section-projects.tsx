@@ -19,7 +19,7 @@ const projects = [
 
 export function SectionProjects() {
   return (
-    <section id="projects" className="scroll-m-12">
+    <section id="projects" className="scroll-m-16">
       <TuiBox title="Technical Projects">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {projects.map((project) => (

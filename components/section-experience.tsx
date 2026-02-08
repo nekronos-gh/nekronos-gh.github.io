@@ -78,7 +78,7 @@ const experience: ExperienceEntry[] = [
 
 export function SectionExperience() {
   return (
-    <section id="experience" className="scroll-m-12">
+    <section id="experience" className="scroll-m-16">
       <TuiBox title="Professional Experience">
         <div className="flex flex-col gap-8">
           {experience.map((entry) => (
