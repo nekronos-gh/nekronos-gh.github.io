@@ -3,7 +3,10 @@ export function PortfolioHeader() {
 		<header className="mb-8">
 			<pre
 				className="text-primary text-xs leading-tight hidden sm:block mb-4"
-				style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}
+				style={{
+					fontFamily:
+						'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+				}}
 				aria-hidden="true"
 			>
 				{`
@@ -14,6 +17,7 @@ export function PortfolioHeader() {
  ███████╗██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝╚██████╔╝
  ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝`}
 			</pre>
+
 			<h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">
 				Eduardo Rodríguez Sánchez
 			</h1>
