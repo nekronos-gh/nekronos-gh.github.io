@@ -23,20 +23,18 @@ export function SectionProjects() {
       <TuiBox title="Technical Projects">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {projects.map((project) => (
-            <div
+            <a
               key={project.name}
-              className="border border-border rounded-sm p-4 bg-secondary hover:border-primary transition-colors"
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block border border-border rounded-sm p-4 bg-secondary hover:border-primary transition-colors cursor-pointer group"
             >
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-accent text-xs">{">"}</span>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-bold text-primary hover:underline"
-                >
+                <span className="text-sm font-bold text-primary group-hover:underline">
                   {project.name}
-                </a>
+                </span>
                 <span className="text-muted-foreground text-xs">{"[link]"}</span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed mb-3">
@@ -52,7 +50,7 @@ export function SectionProjects() {
                   </span>
                 ))}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </TuiBox>
