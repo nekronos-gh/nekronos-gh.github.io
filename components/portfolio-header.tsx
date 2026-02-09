@@ -63,6 +63,10 @@ export function StickyNav() {
 			<a href="#contact" className="text-primary hover:underline">
 				contact
 			</a>
+			<span className="text-border">|</span>
+			<a href="/blogs" className="text-primary hover:underline">
+				blogs
+			</a>
 			<span className="text-border">]</span>
 		</nav>
 	);
