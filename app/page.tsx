@@ -22,6 +22,11 @@ export default function Page() {
         <TuiDivider />
         <SectionAbout />
 
+        {/*TODO: NON CS interests*/}
+        {/*TODO: Gallery with climbing/outdoors/trips/}
+        {/*TODO: World map of visited places*/}
+        {/*TODO: Blog posts*/}
+
         <TuiDivider />
         <SectionInterests />
 
