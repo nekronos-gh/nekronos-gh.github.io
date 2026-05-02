@@ -1,21 +1,21 @@
-import Link from "next/link"
-import { TuiDivider } from "@/components/tui-box"
+import Link from "next/link";
+import { TuiDivider } from "@/components/tui-box";
 
-const slugs = ["first-of-many"]
+const slugs = ["first-of-many", "ukl"];
 
 export function generateStaticParams() {
-  return slugs.map((slug) => ({ slug }))
+  return slugs.map((slug) => ({ slug }));
 }
 
-export const dynamicParams = false
+export const dynamicParams = false;
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
-  const { default: Content, metadata } = await import(`@/content/${slug}.mdx`)
+  const { slug } = await params;
+  const { default: Content, metadata } = await import(`@/content/${slug}.mdx`);
 
   return (
     <>
@@ -29,5 +29,5 @@ export default async function BlogPostPage({
         {"<"} back to blogs
       </Link>
     </>
-  )
+  );
 }

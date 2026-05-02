@@ -1,0 +1,119 @@
+export const metadata = {
+  title: 'Unikernel Linux (UKL)',
+  date: '2025-03-23',
+  description: 'Integrating Unikernel Optimizations in a General-Purpose OS',
+}
+
+# Operating Systems
+
+Let's talk systems, more specifically Operating Systems, and much more specifically kernels. 
+
+Kernels are these executables that help bring a computer to life. They remove the barrier that separates the hardware from the developer/user allowing us to leverage them to build awesome things (if you find fast multiplication to be one of those awesome things).
+
+## Monolithic Kernels
+
+Current kernels come from iterative work over the past 50 years, where software developers hustled with hardware architects to make the usage of computers easier. Currently, the two most famous kernels are the Windows NT kernel and the Linux kernel.
+
+Two very different monolithic kernels that have the same goal, to make hardware work for multiples purposes in a desktop environment. They both have a very different history, and a very different philosophy, but I won't dive into that.
+
+In reality, although end users are a big portion of the computer usage, they are not the biggest. Currently, the main usage of computers is running functions of applications that companies run on servers. These types of applications range from databases, streaming services to webpages. Running these applications on general-purpose Operating Systems, comes with extra overhead caused by the flexibility of the systems (libraries we might not need, security check we could bypass, etc.).
+
+Since these applications require computing power, space, and time, they require money. Therefore, there has always been a need to decrease any of these three metrics. There are plenty of optimizations engineers have developed to make applications run faster on the machines, including optimizations in the kernel (direct memory access, zero-copy syscalls and so). But, the more time it passes, the harder is to find new ways to optimize software running in operating systems by tweaking them.
+
+Scientist have tried to approach kernel optimizations in many ways, and one of the most paradigm breaking ones have been redesigning kernels completely. This has been a fairly new approach, and for now we can classify two different famous architectures: **Microkernels** and **Unikernels**. 
+
+## Microkernels
+
+On one hand Microkernels try to reduce the Kernel to the minimum, reducing the Trusted Computing Base to the individual nec/essary components that can be used to create a fully-fledged operating system. 
+
+The main concern of Microkernels is security, so we can think of their philosophy as: "I will only trust what I can read, verify and check". A kernel such as linux contains approximately 35M lines of code, which makes impossible to read, verify and check. Microkernels allow these three properties by creating small, isolated, and solid components that allow for the basic primitives of an OS: 
+
+- **Execution**: Processes can use the hardware.
+- **Execution Isolation**: Processes cannot interfere with each other.
+- **Inter Process Communication**: Processes have some controlled way of interacting with each other.
+- **Privilege**: Managing access to resources.
+
+## Unikernels
+
+On the other hand Unikernels try to reduce the overhead of a full monolithic kernel, to allow for faster execution of programs. 
+
+The main concern of Unikernels is performance, so we can think of their philosophy as: "Lets build the system so that it only supports the needs of the application it is running". For example, in the Linux kernel we have several problems that slow down applications such as having expensive systemcalls due to a hard line between user and kernel space. Unikernels merge application and kernel code into one binary at supervisor level, and when boundaries dissapear, space for optimizations make their appearance. Some of the optimizations include:
+
+- Avoiding ring transitions overhead.
+- Pass pointers rather than data on a shared address space.
+- Exploit control over scheduling decisions.
+- Efficiently dispatching interrupts to user code.
+- Employ kernel mechanisms to optimize locking and memory management.
+- Enable compiler optimization between application and kernel code.
+
+There are different types of unikernels, depending on their design approach. Clean slate unikernels try to build a kernel from scratch or using a minimal kernel for bootstraping (Unikraft, MirageOS, LightVM, ...). Forks of general-purpose operating systems have well tested codebases and they have better compatibility with existing applications, but they lose the community and the updates on the main kernel. Incremental systems (such as UKL, the one we are studying today) use an exisiting general-purpose OS, but unlike forks, try to maintain the community alignment by buliding patches on top of the original.
+
+## Why are Unikernels and Microkernels not used?
+
+Both of the last two architectures come with great innovative solutions that solve problems from which current OSs suffer from. But sadly, they are still not perfect, and the current solutions and implementations have numerous disadvantages that outweigh the advantages they propose. The most notorious one is the technical knowledge required to work with them, now most of the developers know how linux work and they know how to deploy their applications with it. Migrating to microkenels/unikernels would require a great amount of effort from the whole community of developers, from rewriting all the system tools we use to bringing support to all the heterougeneous hardware of the real world. Financially, it just no make sense for now, although efforts are continuous and we are starting to see some real world use cases for these kernels.
+
+---
+
+# Unikernel Linux
+
+This previous introduction was just to put some in context in the main topic of this blog, Unikernel Linux (UKL). 
+
+Unikernel Linux brings a new approach into the table, a hybrid one, where unikernel optimizations are used on top of the good old Linux kernel that we all know.
+
+The idea is simple, what if we modify the Linux kernel to allow for a single optimized process to link with the kernel directly? This optimized process would not require any type of modification, since its running on Linux; and we would also preserve Linux's codebase, community and ecosystems tools. 
+
+Since we are not losing any of Linux's features, this sounds like a win-win, so lets dive a bit deeper in how it works.
+
+## Design
+
+UKL provides a spectrum of specialization for applications, beginning with a base model UKL configuration that bring modest perfomance improvements and finishing with specialized application optimizations at the end of the spectrum. 
+
+The base model is around 550 LOC, and if all the configuration is disabled, a standard Linux kernel is generated. Starting from the base model, a developer can move along the spectrum by enabling specific configuration options or modifying the application to directly interact with the kernel. The full patch of linux of the base model plus all configurations is around 1250 LOC.
+
+As stated before, this design of extending Linux, allows for the preservation of the full Linux's original functionality such as the `fork()` and `execv()` funtions.
+
+### Base model
+
+The base model of ULK consists of linking the application into the kernel (`--with-program=PROG`) code to create one bootable kernel image. All symbols in the application are prefixed with `ukl_` to avoid name collisions. 
+
+UKL preserves the the standard split of virtual addresses between application and kernel for data structures and algorithms (heap, stacks, mmaped memory regions are located in the user space and kernel data structures and memory management are in the kernel portion), but both sections are allocated in the kernel. This requires the application code to be compiled with flags that allow it to use the higher portions of the address space (`-mcmodel=kernel` and `-mno-re-zone`). This specifically allows for the use of `call` and `ret` instead of `sysenter` and `sysexit` which are much more expensive. UKL implements this specialized entry points to handle the transitions:
+
+- `ukl_entry_SYSCALL_64`: which replaces the standard syscall with with a call implementation.
+- `ukl_ss_u2k` / `ukl_ss_k2u`: helpers for switching between application and kernel states within the unikernel.
+
+Although UKL allows for the linkage of just one application, it still enables for other any applications to run unmodified on the kernel, unlike other unikernels. Other processes running on the machine are not protected from the optimized one linked to the kernel. UKL security model assumes that processes that need to be protected are isolated by a hypervisor.
+
+Lastly, UKL maintains a strict separation between user mode and kernel mode when running code, so there is no need for source code modifications. In adittion it includes a per thread `ukl_mode` to identify whether a thread is in user mode or kernel mode, to correctly handle interruptions, faults and exceptions.
+
+### Optimizations
+
+Once the application code is linked with the kernel code by applying the base model, an expert programmer can apply a number of configurations that may improve performance:
+
+- `--enable-bypass`: enables the glib syscall bypass to perform direct function calls into the kernel.
+- `--enable-use-ret`: replace `iret` with a simple `ret` call with manual restoration of the stack.
+- `--enable-same-stack`: force the kernel to use the application's stack for interrupt handling.
+- `--enable-shortcuts`: provides direct C entry points to subsytem specific logic. to subsytem specific logic.
+- `--enable-libupcall`: enables an alternative asynchronous syscall model.
+s
+An expert programmer can also modify the application to call internal kernel routines that violate assumptions and invariants of the kernel. For example, they might know that only one thread will access a file descriptor and they may remove the locking to improve performance.
+
+## Results!!!
+
+Due to the design explained above, UKL has been capable of executing numerous benchmarks in a diverse hardware landscape with unmodified applications without any additional effort apart from compilation and linkage. Although, compilation can be a challenge, specifically if the software has complex dependencies and Makefiles.
+
+The evaluation made by the research scientists show that the main performance gains do not come by just replacing the `syscall` instruction itself, but from bypassing kernel entry/exit checks and overhead. The base model discussed above performs almost equal to a standard linux, but configurations such as `--enable-bypass` and `--enable-use-ret` achieve an improvement of 80% on small system calls and around 10-22% on larger calls.
+
+These reductions translate directly into real world benefits, such as higher I/O throughput, lower latency on Redis and better tail-latency for multithreaded workloads.
+
+---
+
+# Wrapping up
+
+Unikernels come with great advantages, but there is still a long way to go in order to have systems that are fully usable. The primary problem is that reconstructing a kernel from a clean slate is both very complicated and time consuming, so there is no current value in doing so in short term.
+
+In the long term there are a few initiatives, such as Unikraft. But, in the mean time, we need to find solutions that we can use so the world sees the potential of unikernels. This is what Unikernel Linux brings to the table; some optimizations over the Linux kernel that would take decades to provide in a microkernel that has been built from 0.
+
+Written on VIM.
+
+
+

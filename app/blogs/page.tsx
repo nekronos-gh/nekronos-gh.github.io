@@ -1,11 +1,13 @@
-import Link from "next/link"
-import { TuiBox, TuiDivider } from "@/components/tui-box"
+import Link from "next/link";
+import { TuiBox, TuiDivider } from "@/components/tui-box";
 
-import { metadata as firstOfMany } from "@/content/first-of-many.mdx"
+import { metadata as firstOfMany } from "@/content/first-of-many.mdx";
+import { metadata as ukl } from "@/content/ukl.mdx";
 
 const posts = [
   { slug: "first-of-many", metadata: firstOfMany },
-]
+  { slug: "ukl", metadata: ukl },
+];
 
 export default function BlogListingPage() {
   return (
@@ -41,5 +43,5 @@ export default function BlogListingPage() {
         {"<"} back to home
       </Link>
     </>
-  )
+  );
 }

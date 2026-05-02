@@ -1,4 +1,4 @@
-import type { MDXComponents } from 'mdx/types'
+import type { MDXComponents } from "mdx/types";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -24,7 +24,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <p className="text-muted-foreground mb-4 leading-relaxed">{children}</p>
     ),
     a: ({ href, children }) => (
-      <a href={href} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        className="text-primary hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {children}
       </a>
     ),
@@ -38,9 +43,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </pre>
     ),
-    ul: ({ children }) => (
-      <ul className="mb-4 space-y-1">{children}</ul>
-    ),
+    ul: ({ children }) => <ul className="mb-4 space-y-1">{children}</ul>,
     ol: ({ children }) => (
       <ol className="mb-4 space-y-1 counter-reset-list">{children}</ol>
     ),
@@ -55,6 +58,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </blockquote>
     ),
+    hr: () => (
+      <div
+        className="flex items-center gap-4 mt-12 mb-20 select-none"
+        aria-hidden="true"
+      >
+        <div className="h-px flex-1 bg-border" />
+        <span className="text-[10px] text-muted-foreground font-mono tracking-widest uppercase opacity-50">
+          ---
+        </span>
+        <div className="h-px flex-1 bg-border" />
+      </div>
+    ),
     ...components,
-  }
+  };
 }
