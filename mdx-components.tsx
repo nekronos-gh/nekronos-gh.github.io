@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types";
+import Mermaid from "@/components/mdx/mermaid.tsx";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -33,16 +34,34 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </a>
     ),
-    code: ({ children }) => (
-      <code className="bg-secondary border border-border rounded-sm px-1.5 py-0.5 text-sm text-primary font-mono">
-        {children}
-      </code>
-    ),
-    pre: ({ children }) => (
-      <pre className="bg-secondary border border-border rounded-sm p-4 mb-4 overflow-x-auto text-sm">
-        {children}
-      </pre>
-    ),
+    code: (props: any) => {
+      return (
+        <code
+          className="bg-secondary border border-border rounded-sm px-1.5 py-0.5 text-sm font-mono text-primary"
+          {...props}
+        />
+      );
+    },
+    pre: ({ children, ...props }: any) => {
+      // MDX passes the <code> tag as 'children' to the <pre> tag.
+      const childProps = children?.props;
+      const isMermaid = childProps?.className === "language-mermaid";
+
+      // If it's a mermaid block, hijack it and render the graph!
+      if (isMermaid) {
+        return <Mermaid chart={childProps.children} />;
+      }
+
+      // Otherwise, render a normal terminal code block
+      return (
+        <pre
+          className="bg-secondary border border-border rounded-sm p-4 mb-4 overflow-x-auto text-sm text-terminal font-mono"
+          {...props}
+        >
+          {children}
+        </pre>
+      );
+    },
     ul: ({ children }) => <ul className="mb-4 space-y-1">{children}</ul>,
     ol: ({ children }) => (
       <ol className="mb-4 space-y-1 counter-reset-list">{children}</ol>
@@ -69,6 +88,32 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </span>
         <div className="h-px flex-1 bg-border" />
       </div>
+    ),
+    table: ({ children }) => (
+      <div className="w-full overflow-x-auto my-6 rounded-sm border border-border">
+        <table className="w-full text-sm text-left border-collapse">
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }) => (
+      <thead className="bg-secondary/40 text-muted-foreground font-semibold border-b border-border">
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }) => (
+      <tbody className="divide-y divide-border bg-transparent">
+        {children}
+      </tbody>
+    ),
+    tr: ({ children }) => (
+      <tr className="hover:bg-secondary/20 transition-colors">{children}</tr>
+    ),
+    th: ({ children }) => (
+      <th className="px-4 py-3 align-middle font-medium">{children}</th>
+    ),
+    td: ({ children }) => (
+      <td className="px-4 py-3 align-middle text-primary">{children}</td>
     ),
     ...components,
   };
