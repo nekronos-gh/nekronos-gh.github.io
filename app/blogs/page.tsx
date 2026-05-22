@@ -3,10 +3,12 @@ import { TuiBox, TuiDivider } from "@/components/tui-box";
 
 import { metadata as firstOfMany } from "@/content/first-of-many.mdx";
 import { metadata as ukl } from "@/content/ukl.mdx";
+import { metadata as tesla } from "@/content/tesla.mdx";
 
 const posts = [
   { slug: "first-of-many", metadata: firstOfMany },
   { slug: "ukl", metadata: ukl },
+  { slug: "tesla", metadata: tesla },
 ];
 
 export default function BlogListingPage() {
@@ -45,3 +47,4 @@ export default function BlogListingPage() {
     </>
   );
 }
+

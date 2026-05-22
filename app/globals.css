@@ -30,6 +30,7 @@
     --input: 215 14% 20%;
     --ring: 212 92% 67%;
     --radius: 0.25rem;
+    --terminal: 142 71% 45%;
   }
 }
 
@@ -46,6 +47,7 @@
   background: hsl(212 92% 67% / 0.3);
   color: hsl(0 0% 100%);
 }
+
 
 ::-webkit-scrollbar {
   width: 8px;

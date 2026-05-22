@@ -1,9 +1,9 @@
-import { PortfolioHeader, StickyNav } from "@/components/portfolio-header"
-import { SectionAbout } from "@/components/section-about"
-import { SectionProjects } from "@/components/section-projects"
-import { SectionInterests } from "@/components/section-interests"
-import { PortfolioFooter } from "@/components/portfolio-footer"
-import { TuiDivider } from "@/components/tui-box"
+import { PortfolioHeader, StickyNav } from "@/components/portfolio-header";
+import { SectionAbout } from "@/components/section-about";
+import { SectionProjects } from "@/components/section-projects";
+import { SectionInterests } from "@/components/section-interests";
+import { PortfolioFooter } from "@/components/portfolio-footer";
+import { TuiDivider } from "@/components/tui-box";
 
 export default function Page() {
   return (
@@ -39,9 +39,12 @@ export default function Page() {
         {/* End prompt */}
         <div className="text-xs text-muted-foreground mt-6 mb-4">
           <span className="text-accent">{"$"}</span>{" "}
-          <span className="inline-block w-2 h-4 bg-primary animate-cursor-blink align-middle" aria-hidden="true" />
+          <span
+            className="inline-block w-2 h-4 bg-primary animate-cursor-blink align-middle"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </main>
-  )
+  );
 }

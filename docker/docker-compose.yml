@@ -12,7 +12,6 @@ services:
       - /app/.next
     environment:
       - NODE_ENV=development
-
   prod:
     build:
       context: ..
