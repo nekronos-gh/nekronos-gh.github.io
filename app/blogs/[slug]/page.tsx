@@ -19,6 +19,12 @@ export default async function BlogPostPage({
 
   return (
     <>
+      <div className="mb-8">
+        <Link href="/blogs" className="text-primary hover:underline text-sm">
+          {"<"} back to blogs
+        </Link>
+      </div>
+
       <article className="prose-terminal">
         <Content />
         <footer className="mt-12 mb-4 text-left">
