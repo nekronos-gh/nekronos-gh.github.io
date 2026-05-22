@@ -6,9 +6,9 @@ import { metadata as ukl } from "@/content/ukl.mdx";
 import { metadata as tesla } from "@/content/tesla.mdx";
 
 const posts = [
-  { slug: "first-of-many", metadata: firstOfMany },
-  { slug: "ukl", metadata: ukl },
   { slug: "tesla", metadata: tesla },
+  { slug: "ukl", metadata: ukl },
+  { slug: "first-of-many", metadata: firstOfMany },
 ];
 
 export default function BlogListingPage() {
