@@ -17,7 +17,7 @@ export function PortfolioHeader() {
 
       {/* Name + Info block */}
       <div className="flex flex-col gap-2">
-        <pre className="ext-primary text-xs leading-tight hidden sm:block mb-4">
+        <pre className="text-xs font-mono leading-none tracking-tighter hidden sm:block mb-4">
           {`
  ███████╗██████╗ ██╗   ██╗ █████╗ ██████╗ ██████╗  ██████╗ 
  ██╔════╝██╔══██╗██║   ██║██╔══██╗██╔══██╗██╔══██╗██╔═══██╗
