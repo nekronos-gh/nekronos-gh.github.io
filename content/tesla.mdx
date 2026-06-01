@@ -14,7 +14,7 @@ Hopefully, writing this blog post will help me to organize my mind, and to get a
 
 Today we will be discussing the **NVIDIA's Tesla architecture**, the first architecture to unify the graphics pipeline into one single component, and to allow for programmable parallel computation. I will use the paper `"NVIDIA Tesla: A Unified Graphics and Computing Architecture"` [(pdf)](https://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/readings/lindholm08_tesla.pdf) for reference.
 
-```bibtext color="#888888"
+```bibtext
 @ARTICLE{4523358,
   author={Lindholm, Erik and Nickolls, John and Oberman, Stuart and Montrym, John},
   journal={IEEE Micro}, 
@@ -99,8 +99,8 @@ The _Instruction Set Architecture_ is register based, allowing for floating poin
 - **Shared**: used by cooperating **SPs** within one **SM**.
 - **Global**: external DRAM.
                            
-```text
-               ┌───┐    
+```asciiart
+               ┌───┐
 ┌───────┬───┐  │   │    
 │┌─┬──┐ │S M│  │   │    
 ││ │SP│ │H E├─►│ D │    
@@ -114,7 +114,7 @@ The _Instruction Set Architecture_ is register based, allowing for floating poin
                                     
 The **SM** is the working union of **SPs** that allows for multipurpose computations (Graphics and General Purpose). In the NVIDIA Tesla architecture a **SM** consists of exactly 8 **SPs**, together with two fixed computing units called `Function Units`, which calculate _transcendental functions_ (cosine, sine, binary logarithm, ...). Each **SP** has its own instruction pointer and state registers.
 
-```text
+```asciiart
 ┌────────────────────────┐ 
 │           SM           │ 
 │┌──┐ ┌──┐ ┌──┐ ┌──┐ ┌──┐│ 
@@ -134,7 +134,7 @@ It is important to note that all the threads in a _warp_ execute the same instru
 
 To allow for temporal/spatial locality, the **SM** unit also contains caches both for read only data and instructions. 
 
-```text
+```asciiart
 ┌──────────────────────────────────┐    
 │                SM                │    
 │┌───┐┌──┐ ┌──┐ ┌──┐ ┌──┐ ┌──┐┌───┐│    
@@ -169,7 +169,7 @@ A **TPC** consists of 2 **SMs** managed by an **SM** Controller, together with a
 - The `Geometry Controller` recirculates the **SM** output back to process another step of the graphical pipeline.
 
 
-```text
+```asciiart
 ┌──────────┐
 │   T/PC   │
 │┌────────┐│
@@ -193,7 +193,7 @@ A **TPC** consists of 2 **SMs** managed by an **SM** Controller, together with a
 **TPCs** are fully independently **scalable** and can be increased in number to increase the throughput of the GPU. Because of their modularity, hardware designer can easily scale them to fit different needs: from an entry level GPU with one **TPC** to a high performance GPU with 8 **TPC** (e.g NVIDIA GeForce 8800). The group of **TPC** that computes is called the `Streaming Processor Array`.
 
                                     
-```text
+```asciiart
 ┌───────────────────────────┐     
 │            SPA            │     
 │┌────┐┌────┐┌────┐   ┌────┐│     
@@ -215,7 +215,7 @@ Now that the core computation hardware is set up, the right data has to be distr
 
 Then, after the **TPCs** have finished processing the workload, they can send the output to the `Raster Operation Processor` (ROP) which its job is to perform color an depth operations directly on memory. On the Tesla Architecture, each **ROP** is paired with a specific memory partition, to ensure that memory traffic originates locally. 
 
-```text
+```asciiart
 ┌───────────────────────────────────────────┐ 
 │┌───────────────┐ ┌──────────┐        GPU  │ 
 ││Input Assembler│ │Rasterizer│             │ 
@@ -243,7 +243,7 @@ Note that each **TPC** within the **SPA** has access to a **L2 Cache** for readi
 Lastly, but not less important, we have to be able to communicate with the Host machine. The `GPU Host Interface` unit communicates directly with the CPU and fetches data from system memory. It also interconnects with other GPUs through _NVIDIA Scalable Link Interconnect_ to make it seem as there is only one GPU.
 
 
-```text
+```asciiart
      ┌───┐                    
      │CPU│                    
      └┬─┬┘                    
@@ -263,7 +263,7 @@ Lastly, but not less important, we have to be able to communicate with the Host 
 The `GeForce 8800` series of NVIDIA graphics card were the first implementation of the Tesla Architecture. It contains an **SPA** composed of 8 **TPC**, which results in 128 **SPs**. 
 
 It uses a global DDR3 DRAM with 768 MB of memory, together with its own **MMU** for _virtual address translation_.
-```text
+```asciiart
                       ┌─────┐                                 
                       │ CPU │                                 
                       └──┬──┘                                 

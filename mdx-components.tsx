@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
-import Mermaid from "@/components/mdx/mermaid.tsx";
+import Mermaid from "@/components/mdx/mermaid";
+import AsciiArt from "@/components/mdx/ascii-art";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -43,16 +44,19 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     pre: ({ children, ...props }: any) => {
-      // MDX passes the <code> tag as 'children' to the <pre> tag.
       const childProps = children?.props;
-      const isMermaid = childProps?.className === "language-mermaid";
+      const className = childProps?.className ?? "";
+      const isMermaid = className === "language-mermaid";
+      const isAsciiArt = className === "language-asciiart";
 
-      // If it's a mermaid block, hijack it and render the graph!
       if (isMermaid) {
         return <Mermaid chart={childProps.children} />;
       }
 
-      // Otherwise, render a normal terminal code block
+      if (isAsciiArt) {
+        return <AsciiArt chart={childProps.children} />;
+      }
+
       return (
         <pre
           className="bg-secondary border border-border rounded-sm p-4 mb-4 overflow-x-auto text-sm text-terminal font-mono"
