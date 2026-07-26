@@ -71,3 +71,15 @@
 .prose-terminal img {
   border-radius: 1.5rem;
 }
+
+.prose-terminal * {
+  max-width: 100%;
+}
+
+.prose-terminal pre,
+.prose-terminal code {
+  overflow-x: auto;
+}
+
+
+
