@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { TuiDivider } from "@/components/tui-box";
+import { readingTime } from "@/lib/utils";
+import fs from "fs";
+import path from "path";
 
-const slugs = ["first-of-many", "ukl", "tesla"];
+
+const slugs = ["first-of-many", "ukl", "tesla", "mullerthal"];
 
 export function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
@@ -16,6 +20,11 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
   const { default: Content, metadata } = await import(`@/content/${slug}.mdx`);
+  const mdxContent = fs.readFileSync(
+    path.join(process.cwd(), "content", `${slug}.mdx`),
+    "utf-8"
+  );
+  const readTime = readingTime(mdxContent);
 
   return (
     <>
@@ -26,6 +35,11 @@ export default async function BlogPostPage({
       </div>
 
       <article className="prose-terminal">
+        <div className="float-right">
+          <div className="text-sm text-muted-foreground mb-4 bg-muted rounded-full px-3 py-1">
+            {readTime}
+          </div>
+        </div>
         <Content />
         <footer className="mt-12 mb-4 text-left">
           <img

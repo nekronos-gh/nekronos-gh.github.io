@@ -44,7 +44,7 @@ export function PortfolioFooter() {
               className="text-primary hover:underline flex items-center gap-1"
             >
               <Mail size={14} />
-              LinkedIn
+              Email
             </a>
           </div>
         </div>

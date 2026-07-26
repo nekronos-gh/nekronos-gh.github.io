@@ -1,30 +1,34 @@
 import type { MDXComponents } from "mdx/types";
 import Mermaid from "@/components/mdx/mermaid";
 import AsciiArt from "@/components/mdx/ascii-art";
+import Image from "@/components/mdx/image";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    img: (props: any) => <Image {...props} />,
+    p: ({ children }) => (
+      <p className="text-muted-foreground leading-relaxed mb-4">{children}</p>
+    ),
+
     h1: ({ children }) => (
-      <div className="flex items-center gap-2 mb-4 mt-8">
+      <div className="heading-block flex items-center gap-2 mb-4 mt-8">
         <span className="text-muted-foreground">{"#"}</span>
         <h1 className="text-primary font-bold text-2xl">{children}</h1>
       </div>
     ),
     h2: ({ children }) => (
-      <div className="flex items-center gap-2 mb-3 mt-6">
+      <div className="heading-block flex items-center gap-2 mb-3 mt-6">
         <span className="text-muted-foreground">{"##"}</span>
         <h2 className="text-primary font-bold text-xl">{children}</h2>
       </div>
     ),
     h3: ({ children }) => (
-      <div className="flex items-center gap-2 mb-2 mt-4">
+      <div className="heading-block flex items-center gap-2 mb-2 mt-4">
         <span className="text-muted-foreground">{"###"}</span>
         <h3 className="text-primary font-bold text-lg">{children}</h3>
       </div>
     ),
-    p: ({ children }) => (
-      <p className="text-muted-foreground mb-4 leading-relaxed">{children}</p>
-    ),
+
     a: ({ href, children }) => (
       <a
         href={href}
@@ -66,7 +70,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </pre>
       );
     },
-    ul: ({ children }) => <ul className="mb-4 space-y-1">{children}</ul>,
+    ul: ({ children }) => <ul className="mb-3 mt-3 space-y-1">{children}</ul>,
     ol: ({ children }) => (
       <ol className="mb-4 space-y-1 counter-reset-list">{children}</ol>
     ),

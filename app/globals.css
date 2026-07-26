@@ -41,13 +41,15 @@
   body {
     @apply bg-background text-foreground;
   }
+  .heading-block + p {
+    text-indent: 2rem;
+  }
 }
 
 ::selection {
   background: hsl(212 92% 67% / 0.3);
   color: hsl(0 0% 100%);
 }
-
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -64,4 +66,8 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(215 14% 30%);
+}
+
+.prose-terminal img {
+  border-radius: 1.5rem;
 }

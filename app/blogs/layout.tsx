@@ -15,7 +15,7 @@ export default function BlogLayout({
   return (
     <main className="min-h-screen bg-background text-foreground px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl">
-        <div className="text-xs text-muted-foreground mb-6">
+        <div className="relative text-xs text-muted-foreground mb-6">
           <span className="text-accent">{"$"}</span>{" "}
           <span>cat {fileName}</span>
         </div>
